@@ -1,0 +1,24 @@
+{
+    "name": "blocksframework/system",
+    "description": "A module with the most basic and important classes of the Blocks PHP framework",
+    "license": "MIT",
+    "keywords": [
+        "blocks",
+        "framework",
+        "system"
+    ],
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blocks\\System\\":"src/class"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephen Stephenson",
+            "email": "stephenson.inbox@gmail.com"
+        }
+    ]
+}
