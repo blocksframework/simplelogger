@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleLogger;
+namespace Blocks\System;
 
 /**
  * A class used for writing logs (no severity level).
