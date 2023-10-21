@@ -2,6 +2,8 @@
 
 namespace Blocks\System;
 
+use RuntimeException;
+
 /**
  * A class used for writing logs (no severity level).
  */
@@ -15,14 +17,14 @@ class SimpleLogger {
         if ( $filepath ) {
             if ( !file_exists( $this->filepath ) ) {
                 if ( !touch( $this->filepath ) ) {
-                    new \Exception( 'Can\'t create log file: '.$this->filepath );
+                    new RuntimeException( 'Can\'t create log file: '.$this->filepath );
                 }
 
                 chmod( $this->filepath, 0660 );
             }
 
             if ( !is_writable( $this->filepath ) ) {
-                new \Exception( 'Can\'t write to a file: '.$this->filepath );
+                new RuntimeException( 'Can\'t write to a file: '.$this->filepath );
             }
 
             $this->handle = fopen( $this->filepath, 'a+' );
