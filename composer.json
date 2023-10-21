@@ -8,7 +8,10 @@
         "system"
     ],
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "beberlei/assert": "^3.3",
+        "phpunit/phpunit": "^9.6",
+        "blocksframework/data": "dev-master"
     },
     "autoload": {
         "psr-4": {
