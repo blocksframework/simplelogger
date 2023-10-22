@@ -1,6 +1,6 @@
 <?php
 
-namespace Bausystem;
+namespace Blocks\System;
 
 use Blocks\System\Helper\StringsArrayParam;
 use Blocks\System\Helper\FilesCollectionParam;
