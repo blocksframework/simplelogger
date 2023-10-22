@@ -2,7 +2,9 @@
 
 namespace Bausystem;
 
-use Bausystem\Helper\Param;
+use Blocks\System\Helper\StringsArrayParam;
+use Blocks\System\Helper\FilesCollectionParam;
+use Blocks\System\Collection\FilesCollection;
 use Assert\Assert;
 use Assert\LazyAssertionException;
 use RuntimeException;
@@ -21,7 +23,7 @@ class Filesystem {
      * @return array of strings
      */
     public static function collectFiles(array|string $param) {
-        $paths = Param::getStringsParam($param);
+        $paths = StringsArrayParam::get($param);
 
         $results = [];
 
@@ -46,8 +48,12 @@ class Filesystem {
      *
      * @return array of strings
      */
-    public static function deleteFiles(array|string|SplFileInfo $files_param, array $settings = [ 'ignore_non_existing' => true ] ): bool {
-        $files = Param::getFilesParam($files_param);
+    public static function deleteFiles(array|string|SplFileInfo|FilesCollection $files_param, array $settings = [ 'ignore_non_existing' => true ] ): bool {
+        if ($files_param instanceof FilesCollection) {
+            $files = $files_param;
+        } else {
+            $files = FilesCollectionParam::get($files_param);
+        }
 
         foreach ($files as $file) {
             $absolute_path = $file->getPathname();
