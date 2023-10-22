@@ -44,7 +44,7 @@ class Filesystem {
      *
      * @return array of strings
      */
-    public static function deleteFiles( array|FilesCollection|\SplFileInfo|string $files_param, array $settings = ['ignore_non_existing' => true] ): bool {
+    public static function deleteFiles( array|FilesCollection|\SplFileInfo|string $files_param, array $settings = ['ignore_non_existing' => true, 'verbose' => false] ): bool {
         if ( $files_param instanceof FilesCollection ) {
             $files = $files_param;
         }
@@ -78,7 +78,9 @@ class Filesystem {
 
             if ( $file->isLink() ) {
                 if ( @unlink( $absolute_path ) ) {
-                    CommandLineOutput::success( 'Successfully deleted symlink: "'.$absolute_path.'"' );
+                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                        CommandLineOutput::success( 'Successfully deleted symlink: "'.$absolute_path.'"' );
+                    }
 
                     continue;
                 }
@@ -87,7 +89,9 @@ class Filesystem {
             }
             elseif ( is_dir( $absolute_path ) ) {
                 if ( @rmdir( $absolute_path ) ) {
-                    CommandLineOutput::success( 'Successfully deleted directory: "'.$absolute_path.'"' );
+                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                        CommandLineOutput::success( 'Successfully deleted directory: "'.$absolute_path.'"' );
+                    }
 
                     continue;
                 }
@@ -99,7 +103,9 @@ class Filesystem {
             }
             elseif ( is_file( $absolute_path ) ) {
                 if ( @unlink( $absolute_path ) ) {
-                    CommandLineOutput::success( 'Successfully deleted file: "'.$absolute_path.'"' );
+                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                        CommandLineOutput::success( 'Successfully deleted file: "'.$absolute_path.'"' );
+                    }
 
                     continue;
                 }
