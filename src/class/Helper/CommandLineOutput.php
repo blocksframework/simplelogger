@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Helper;
+namespace Blocks\System\Helper;
 
 /**
  * A class for printing text to the command line.
