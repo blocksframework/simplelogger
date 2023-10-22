@@ -4,6 +4,7 @@ namespace Blocks\System;
 
 use Blocks\System\Helper\StringsArrayParam;
 use Blocks\System\Helper\FilesCollectionParam;
+use Blocks\System\Helper\CommandLineOutput;
 use Blocks\System\Collection\FilesCollection;
 use Assert\Assert;
 use Assert\LazyAssertionException;
@@ -11,7 +12,6 @@ use RuntimeException;
 use GlobIterator;
 use SplFileInfo;
 use Exception;
-use Bausystem\Output;
 
 class Filesystem {
 
@@ -80,7 +80,7 @@ class Filesystem {
 
             if ( $file->isLink() ) {
                 if ( @unlink($absolute_path) ) {
-                    Output::success('Successfully deleted symlink: "' . $absolute_path . '"');
+                    CommandLineOutput::success('Successfully deleted symlink: "' . $absolute_path . '"');
                     continue;
 
                 } else {
@@ -89,7 +89,7 @@ class Filesystem {
    
             } elseif ( is_dir($absolute_path) ) {
                 if ( @rmdir($absolute_path) ) {
-                    Output::success('Successfully deleted directory: "' . $absolute_path . '"');
+                    CommandLineOutput::success('Successfully deleted directory: "' . $absolute_path . '"');
                     continue;
 
                 } else {
@@ -102,7 +102,7 @@ class Filesystem {
 
             } elseif ( is_file($absolute_path) ) {
                 if ( @unlink($absolute_path) ) {
-                    Output::success('Successfully deleted file: "' . $absolute_path . '"');
+                    CommandLineOutput::success('Successfully deleted file: "' . $absolute_path . '"');
                     continue;
 
                 } else {
@@ -110,7 +110,7 @@ class Filesystem {
                 }
 
             } else {
-                if ( isset( $settings['ignore_non_existing'] ) && $settings['ignore_non_existing'] === false ) {
+                if ( isset( $settings ) && isset( $settings['ignore_non_existing'] ) && $settings['ignore_non_existing'] === false ) {
                     throw new RuntimeException('Cannot delete file: "' . $absolute_path . '". The file does not exist');
                 }
             }
