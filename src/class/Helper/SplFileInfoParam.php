@@ -2,11 +2,10 @@
 
 namespace Blocks\System\Helper;
 
-use Blocks\System\Helper\ParamInterface;
 use SplFileInfo;
 use Exception;
 
-class SplFileInfoParam implements ParamInterface {
+class SplFileInfoParam {
 
     /**
      * Param converter

@@ -2,10 +2,9 @@
 
 namespace Blocks\System\Helper;
 
-use Blocks\System\Helper\ParamInterface;
 use Exception;
 
-class StringsArrayParam implements ParamInterface {
+class StringsArrayParam {
 
     /**
      * Param converter
