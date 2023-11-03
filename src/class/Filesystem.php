@@ -7,7 +7,6 @@ use Assert\LazyAssertionException;
 use Blocks\System\Collection\FilesCollection;
 use Blocks\System\Helper\CommandLineOutput;
 use Blocks\System\Helper\StringsArrayParam;
-use SplFileInfo;
 
 class Filesystem {
     /**
@@ -15,9 +14,9 @@ class Filesystem {
      *
      * @param string or array of strings
      *
-     * @return array of strings
+     * @return FilesCollection
      */
-    public static function collectFiles( array|string $param ) {
+    public static function collectFiles( array|string $param ): FilesCollection {
         $paths = StringsArrayParam::get( $param );
 
         $results = [];
@@ -31,9 +30,7 @@ class Filesystem {
             }
         }
 
-        // TODO: to return an array of SplFileInfo items
-
-        return $results;
+        return new FilesCollection( $results );
     }
 
     /**
