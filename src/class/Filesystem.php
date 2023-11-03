@@ -6,7 +6,6 @@ use Assert\Assert;
 use Assert\LazyAssertionException;
 use Blocks\System\Collection\FilesCollection;
 use Blocks\System\Helper\CommandLineOutput;
-use Blocks\System\Helper\FilesCollectionParam;
 use Blocks\System\Helper\StringsArrayParam;
 use SplFileInfo;
 
@@ -49,7 +48,7 @@ class Filesystem {
             $files = $files_param;
         }
         else {
-            $files = FilesCollectionParam::get( $files_param );
+            $files = new FilesCollection( $files_param );
         }
 
         foreach ( $files as $file ) {
@@ -78,7 +77,7 @@ class Filesystem {
 
             if ( $file->isLink() ) {
                 if ( @unlink( $absolute_path ) ) {
-                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                    if ( isset( $settings, $settings['verbose'] ) && true === $settings['verbose'] ) {
                         CommandLineOutput::success( 'Successfully deleted symlink: "'.$absolute_path.'"' );
                     }
 
@@ -89,7 +88,7 @@ class Filesystem {
             }
             elseif ( is_dir( $absolute_path ) ) {
                 if ( @rmdir( $absolute_path ) ) {
-                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                    if ( isset( $settings, $settings['verbose'] ) && true === $settings['verbose'] ) {
                         CommandLineOutput::success( 'Successfully deleted directory: "'.$absolute_path.'"' );
                     }
 
@@ -103,7 +102,7 @@ class Filesystem {
             }
             elseif ( is_file( $absolute_path ) ) {
                 if ( @unlink( $absolute_path ) ) {
-                    if ( isset( $settings ) && isset( $settings['verbose'] ) && $settings['verbose'] === true ) {
+                    if ( isset( $settings, $settings['verbose'] ) && true === $settings['verbose'] ) {
                         CommandLineOutput::success( 'Successfully deleted file: "'.$absolute_path.'"' );
                     }
 
