@@ -2,8 +2,6 @@
 
 namespace Blocks\System\View;
 
-use Blocks\System\View\Template;
-
 class HtmlPageView extends Template {
     private $htmlPage;
 

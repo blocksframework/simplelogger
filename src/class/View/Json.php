@@ -1,8 +1,8 @@
 <?php
 
-namespace System\View;
+namespace Blocks\System\View;
 
-use System\View;
+use Blocks\System\View;
 
 class JsonView extends View {
     public function render(): ?string {
