@@ -1,8 +1,8 @@
 <?php
 
-namespace System\View;
+namespace Blocks\System\View;
 
-use System\View;
+use Blocks\System\View;
 
 class Template extends View {
     protected $template_path;

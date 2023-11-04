@@ -1,8 +1,10 @@
 <?php
 
-namespace System\View;
+namespace Blocks\System\View;
 
-class HtmlPageView extends HtmlSnippetView {
+use Blocks\System\View\Template;
+
+class HtmlPageView extends Template {
     private $htmlPage;
 
     public function __construct( $html_page, $template ) {
