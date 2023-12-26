@@ -1,6 +1,6 @@
 <?php
 
-namespace System;
+namespace Blocks\System;
 
 abstract class View {
     public $data = [];

@@ -31,6 +31,7 @@ class Template extends View {
 
             return $content;
         }
+
         trigger_error_in_class( 'Template->fetch(): could not load template "'.$file.'"' );
     }
 }
