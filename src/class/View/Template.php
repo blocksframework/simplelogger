@@ -16,17 +16,17 @@ class Template extends View {
     }
 
     public function render(): ?string {
-        if ( file_exists( $path ) ) {
+        if ( file_exists( $this->path ) ) {
             extract( $this->data );
 
             ob_start();
-            require $path;
+            require $this->path;
             $content = ob_get_contents();
             ob_end_clean();
 
             return $content;
         }
 
-        throw new \Exception( 'Template->fetch(): could not load template "'.$path.'"' );
+        throw new \Exception( 'Template->render(): could not load template "'.$this->path.'"' );
     }
 }
