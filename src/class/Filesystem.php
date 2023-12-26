@@ -267,6 +267,67 @@ class Filesystem {
             return substr( $child_absolute_path, $top_parent_absolute_path_length + 1 );
         }
 
-        throw new \Exception( 'Fatal error occured in the function getRelativePathByRemovingTopParentAbsolutePath()' );
+        throw new \RuntimeException( 'Fatal error occured in the function getRelativePathByRemovingTopParentAbsolutePath()' );
     }
+
+    public static function write($filepath, $data) {
+        if ( ($file = fopen($filepath, 'w') ) !== false ) {
+            fwrite($file, $data);
+            fclose($file);
+        } else {
+            throw new \RuntimeException( 'Could not write data to a file: ' );
+        }
+    }        
+
+    public static function append($filepath, $data) {
+        if ( ( $file = fopen($filepath, 'a+') ) !== false ) {
+            fwrite($file, $data);
+            fclose($file);
+        } else {
+            throw new \RuntimeException( 'Could not append data to a file: ' );
+        }
+    }
+
+    /*
+    public static function getFileExtensionSimpleWay($filename) {
+        return substr($filename, strrpos($filename, '.') + 1);
+    }
+    */
+
+    // From Zend, to re-write later
+    static function getMimeType($filepath, $encoding = true) {
+        self::assertFile($path);
+
+        $mime = false;
+
+        if ( function_exists('finfo_file') ) {
+            $finfo = finfo_open(FILEINFO_MIME);
+            $mime = finfo_file($finfo, $filepath);
+            finfo_close($finfo);
+
+        } else if (substr(PHP_OS, 0, 3) == 'WIN') {
+            $mime = mime_content_type($filepath);
+
+        } else {
+            $filepath = escapeshellarg($filepath);
+            $cmd = "file -iL {$filepath}";
+
+            exec($cmd, $output, $r);
+
+            if ($r == 0) {
+                $mime = substr( $output[0], strpos($output[0], ': ') + 2 );
+            }
+        }
+
+        if ( !$mime ) {
+            return false;
+        }
+
+        if ($encoding) {
+            return $mime;
+        }
+
+        return substr( $mime, 0, strpos($mime, '; ') );
+    }
+
 }
