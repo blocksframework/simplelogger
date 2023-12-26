@@ -9,7 +9,7 @@ class Template extends View {
 
     public function __construct( string $template_path ) {
         if ( !empty( $template_path ) ) {
-            trigger_error_in_class( 'Class member $template_path can\'t be undefined or an empty string' );
+            throw new \Exception( 'Class member $template_path can\'t be undefined or an empty string' );
         }
 
         $this->template_path = $template_path;
@@ -32,6 +32,6 @@ class Template extends View {
             return $content;
         }
 
-        trigger_error_in_class( 'Template->fetch(): could not load template "'.$file.'"' );
+        throw new \Exception( 'Template->fetch(): could not load template "'.$file.'"' );
     }
 }
