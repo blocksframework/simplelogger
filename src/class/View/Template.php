@@ -8,7 +8,7 @@ class Template extends View {
     protected $template_path;
 
     public function __construct( string $template_path ) {
-        if ( !present( $template_path ) ) {
+        if ( !empty( $template_path ) ) {
             trigger_error_in_class( 'Class member $template_path can\'t be undefined or an empty string' );
         }
 
