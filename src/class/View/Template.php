@@ -20,8 +20,11 @@ class Template extends View {
             extract( $this->data );
 
             ob_start();
+
             require $this->path;
+
             $content = ob_get_contents();
+
             ob_end_clean();
 
             return $content;
