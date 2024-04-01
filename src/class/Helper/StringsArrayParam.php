@@ -10,7 +10,7 @@ class StringsArrayParam {
      *
      * @return array of strings
      */
-    public static function get( array|string $param ) {
+    public static function get( array|string $param ): array|string {
         $results = [];
 
         if ( is_array( $param ) ) {
@@ -24,7 +24,7 @@ class StringsArrayParam {
             }
         }
         elseif ( is_string( $param ) ) {
-            $results[] = $item;
+            $results[] = $param;
         }
         else {
             throw new \Exception( 'The passed argument is neither an array of strings, nor a string' );

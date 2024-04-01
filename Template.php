@@ -1,11 +1,11 @@
 <?php
 
-namespace Blocks\System\View;
+namespace Blocks\System;
 
-use Blocks\System\View;
+class Template {
+    private $path;
 
-class Template extends View {
-    protected $path;
+    public $data = [];
 
     public function __construct( string $path ) {
         if ( empty( $path ) ) {
