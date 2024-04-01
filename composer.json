@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Blocks\\System\\":"src/class"
+            "Blocks\\System\\": "src/class"
         }
     },
     "authors": [
